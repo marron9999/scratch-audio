@@ -41,14 +41,29 @@ const decodeAudioData = function (audioContext, buffer) {
  * sprites.
  */
 class AudioEngine {
-    constructor (audioContext = new AudioContext()) {
+    constructor (audioContext = new AudioContext()
+//{{ #10
+				, autoStart = true
+//}} #10
+    ) {
         /**
          * AudioContext to play and manipulate sounds with a graph of source
          * and effect nodes.
          * @type {AudioContext}
          */
+//{{ #10
+		if(audioContext == null) {
+			audioContext = new AudioContext();
+		}
+//}} #10
         this.audioContext = audioContext;
+//{{ #10
+		if(autoStart) {
+//}} #10
         StartAudioContext(this.audioContext);
+//{{ #10
+		}
+//}} #10
 
         /**
          * Master GainNode that all sounds plays through. Changing this node
